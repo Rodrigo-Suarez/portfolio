@@ -1,12 +1,17 @@
-import { Button } from "@/components/ui";
+"use client";
+
+import { Button, ThemeToggle, LanguageToggle } from "@/components/ui";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Header() {
+  const { t } = useLanguage();
+  
   const navItems = [
-    { label: "Sobre mí", href: "#about" },
-    { label: "Experiencia", href: "#experience" },
-    { label: "Proyectos", href: "#projects" },
-    { label: "Stack", href: "#stack" },
-    { label: "Contacto", href: "#contact" },
+    { label: t("nav.about"), href: "#about" },
+    { label: t("nav.experience"), href: "#experience" },
+    { label: t("nav.projects"), href: "#projects" },
+    { label: t("nav.stack"), href: "#stack" },
+    { label: t("nav.contact"), href: "#contact" },
   ];
 
   return (
@@ -29,9 +34,13 @@ export function Header() {
           ))}
         </ul>
 
-        <Button href="#contact" size="sm">
-          Contactar
-        </Button>
+        <div className="flex items-center gap-2">
+          <LanguageToggle />
+          <ThemeToggle />
+          <Button href="#contact" size="sm">
+            {t("nav.contactBtn")}
+          </Button>
+        </div>
       </nav>
     </header>
   );

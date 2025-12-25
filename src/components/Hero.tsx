@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { Button, GitHubIcon, LinkedInIcon, EmailIcon, DownloadIcon } from "@/components/ui";
+import { useLanguage } from "@/context/LanguageContext";
 
 const socialLinks = [
   {
@@ -20,6 +23,8 @@ const socialLinks = [
 ];
 
 export function Hero() {
+  const { t } = useLanguage();
+  
   return (
     <section className="py-20 md:py-28">
       <div className="flex flex-col-reverse md:flex-row items-center gap-10 md:gap-16">
@@ -27,7 +32,7 @@ export function Hero() {
         <div className="flex-1 space-y-6">
           <div className="space-y-2">
             <p className="text-[var(--color-accent)] font-medium">
-              Backend Developer
+              {t("hero.role")}
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-foreground)] tracking-tight">
               Rodrigo Suarez
@@ -35,8 +40,7 @@ export function Hero() {
           </div>
           
           <p className="text-lg md:text-xl text-[var(--color-muted)] max-w-2xl leading-relaxed">
-            Diseño y desarrollo sistemas backend robustos, APIs escalables y 
-            arquitecturas que resuelven problemas de negocio reales.
+            {t("hero.description")}
           </p>
 
           {/* Links de redes sociales */}
@@ -58,11 +62,11 @@ export function Hero() {
           {/* Botones de acción */}
           <div className="flex flex-wrap gap-4 pt-2">
             <Button href="#projects" size="lg">
-              Ver proyectos
+              {t("hero.viewProjects")}
             </Button>
-            <Button href="/CV-ES-Rodrigo-Suarez-Backend.pdf" variant="secondary" size="lg" external>
+            <Button href={t("hero.cvPath")} variant="secondary" size="lg" external>
               <DownloadIcon className="w-4 h-4 mr-2" />
-              Descargar CV
+              {t("hero.downloadCV")}
             </Button>
           </div>
         </div>

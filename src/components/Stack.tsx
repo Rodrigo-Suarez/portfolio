@@ -1,49 +1,82 @@
+"use client";
+
 import { Section, Badge } from "@/components/ui";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface StackCategory {
-  name: string;
-  items: string[];
+  nameKey: string;
+  items: { key?: string; value: string }[];
 }
 
 const stack: StackCategory[] = [
   {
-    name: "Lenguajes",
-    items: ["Node.js", "TypeScript", "JavaScript", "Python", "SQL"],
+    nameKey: "stack.languages",
+    items: [
+      { value: "Node.js" },
+      { value: "TypeScript" },
+      { value: "JavaScript" },
+      { value: "Python" },
+      { value: "SQL" },
+    ],
   },
   {
-    name: "Frameworks",
-    items: ["NestJS", "FastAPI"],
+    nameKey: "stack.frameworks",
+    items: [
+      { value: "NestJS" },
+      { value: "FastAPI" },
+    ],
   },
   {
-    name: "Bases de datos",
-    items: ["PostgreSQL", "MySQL", "Redis"],
+    nameKey: "stack.databases",
+    items: [
+      { value: "PostgreSQL" },
+      { value: "MySQL" },
+      { value: "Redis" },
+    ],
   },
   {
-    name: "Herramientas",
-    items: ["Git", "GitHub", "Docker", "Linux", "Postman"],
+    nameKey: "stack.tools",
+    items: [
+      { value: "Git" },
+      { value: "GitHub" },
+      { value: "Docker" },
+      { value: "Linux" },
+      { value: "Postman" },
+    ],
   },
   {
-    name: "Idiomas",
-    items: ["Español", "Inglés A2/B1"],
+    nameKey: "stack.spoken",
+    items: [
+      { key: "stack.spanish", value: "Español" },
+      { key: "stack.english", value: "Inglés A2/B1" },
+    ],
   },
   {
-    name: "Prácticas",
-    items: ["REST APIs", "Clean Code", "Documentación"],
+    nameKey: "stack.practices",
+    items: [
+      { value: "REST APIs" },
+      { value: "Clean Code" },
+      { value: "Documentación" },
+    ],
   },
 ];
 
 export function Stack() {
+  const { t } = useLanguage();
+  
   return (
-    <Section id="stack" title="Stack técnico">
+    <Section id="stack" title={t("stack.title")}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {stack.map((category) => (
-          <div key={category.name}>
+          <div key={category.nameKey}>
             <h3 className="text-sm font-medium text-[var(--color-foreground)] mb-3">
-              {category.name}
+              {t(category.nameKey)}
             </h3>
             <div className="flex flex-wrap gap-2">
               {category.items.map((item) => (
-                <Badge key={item} variant="outline">{item}</Badge>
+                <Badge key={item.value} variant="outline">
+                  {item.key ? t(item.key) : item.value}
+                </Badge>
               ))}
             </div>
           </div>

@@ -2,4 +2,6 @@ export { Section } from "./Section";
 export { Badge } from "./Badge";
 export { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./Card";
 export { Button } from "./Button";
-export { GitHubIcon, LinkedInIcon, EmailIcon, DownloadIcon } from "./Icons";
+export { GitHubIcon, LinkedInIcon, EmailIcon, DownloadIcon, SunIcon, MoonIcon } from "./Icons";
+export { ThemeToggle } from "./ThemeToggle";
+export { LanguageToggle } from "./LanguageToggle";

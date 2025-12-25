@@ -1,10 +1,13 @@
+"use client";
+
 import { Section, Card, CardHeader, CardTitle, CardDescription, CardContent, Badge, Button } from "@/components/ui";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Project {
-  title: string;
-  description: string;
-  problem: string;
-  solution: string;
+  titleKey: string;
+  descriptionKey: string;
+  problemKey: string;
+  solutionKey: string;
   technologies: string[];
   github?: string;
   demo?: string;
@@ -12,52 +15,54 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "CotizaFácil",
-    description: "Plataforma SaaS con gestión de cotizaciones, generación de PDFs y dashboard en tiempo real.",
-    problem: "Muchos trabajadores de oficios cotizan de forma informal, desordenada y sin métodos de pago digitales.",
-    solution: "Estandariza el proceso de cotización mediante plantillas, flujos guiados y estados, centralizando clientes, presupuestos y pagos en un sistema digital.",
+    titleKey: "projects.project1.title",
+    descriptionKey: "projects.project1.description",
+    problemKey: "projects.project1.problem",
+    solutionKey: "projects.project1.solution",
     technologies: ["Node.js", "TypeScript", "NestJS", "PostgreSQL", "Docker", "Redis"],
     github: "",
   },
   {
-    title: "LockBox",
-    description: "Sistema de almacenamiento de archivos con control de versiones en Google Cloud Storage.",
-    problem: "No existe una forma simple de mantener historial y reversión de cambios en archivos personales de manera segura.",
-    solution: "Versiona automáticamente cada modificación, registra metadatos de cambios y permite restaurar estados anteriores sin intervención manual del usuario.",
+    titleKey: "projects.project2.title",
+    descriptionKey: "projects.project2.description",
+    problemKey: "projects.project2.problem",
+    solutionKey: "projects.project2.solution",
     technologies: ["Python", "Django", "PostgreSQL", "Google Cloud Storage"],
     github: "https://github.com/Rodrigo-Suarez/Lock-Box",
   },
   {
-    title: "Ticket Flow",
-    description: "Gestión de eventos y tickets digitales con QR únicos e integración de pagos (Mercado Pago).",
-    problem: "La gestión manual de entradas genera errores, fraude y falta de control en eventos.",
-    solution: "Automatiza el ciclo completo del ticket mediante generación única, validación en tiempo real y control de acceso centralizado.",
+    titleKey: "projects.project3.title",
+    descriptionKey: "projects.project3.description",
+    problemKey: "projects.project3.problem",
+    solutionKey: "projects.project3.solution",
     technologies: ["Python", "FastAPI", "SQLAlchemy", "MySQL", "Mercado Pago"],
     github: "https://github.com/Rodrigo-Suarez/Ticket-Flow",
   },
 ];
 
 export function Projects() {
+  const { t } = useLanguage();
+  
   return (
-    <Section id="projects" title="Proyectos">
+    <Section id="projects" title={t("projects.title")}>
       <div className="grid gap-6">
         {projects.map((project, index) => (
           <Card key={index} className="hover:border-[var(--color-accent)]/50 transition-all duration-300">
             <CardHeader>
-              <CardTitle>{project.title}</CardTitle>
-              <CardDescription>{project.description}</CardDescription>
+              <CardTitle>{t(project.titleKey)}</CardTitle>
+              <CardDescription>{t(project.descriptionKey)}</CardDescription>
             </CardHeader>
             
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-sm font-medium text-[var(--color-foreground)] mb-1">Problema</h4>
-                  <p className="text-sm text-[var(--color-muted)]">{project.problem}</p>
+                  <h4 className="text-sm font-medium text-[var(--color-foreground)] mb-1">{t("projects.problem")}</h4>
+                  <p className="text-sm text-[var(--color-muted)]">{t(project.problemKey)}</p>
                 </div>
                 
                 <div>
-                  <h4 className="text-sm font-medium text-[var(--color-foreground)] mb-1">Solución</h4>
-                  <p className="text-sm text-[var(--color-muted)]">{project.solution}</p>
+                  <h4 className="text-sm font-medium text-[var(--color-foreground)] mb-1">{t("projects.solution")}</h4>
+                  <p className="text-sm text-[var(--color-muted)]">{t(project.solutionKey)}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -69,12 +74,12 @@ export function Projects() {
                 <div className="flex gap-3 pt-2">
                   {project.github && (
                     <Button href={project.github} variant="ghost" size="sm" external>
-                      Ver código →
+                      {t("projects.viewCode")}
                     </Button>
                   )}
                   {project.demo && (
                     <Button href={project.demo} variant="ghost" size="sm" external>
-                      Demo →
+                      {t("projects.demo")}
                     </Button>
                   )}
                 </div>

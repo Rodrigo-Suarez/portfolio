@@ -1,4 +1,7 @@
-import { Section, Button, GitHubIcon, LinkedInIcon, EmailIcon } from "@/components/ui";
+"use client";
+
+import { Section, GitHubIcon, LinkedInIcon, EmailIcon } from "@/components/ui";
+import { useLanguage } from "@/context/LanguageContext";
 
 const contactMethods = [
   {
@@ -6,36 +9,37 @@ const contactMethods = [
     value: "rodrigo.facultad.unsj@email.com",
     href: "mailto:rodrigo.facultad.unsj@email.com",
     icon: EmailIcon,
-    description: "Para consultas profesionales",
+    descriptionKey: "contact.email.description",
   },
   {
     name: "GitHub",
     value: "github.com/rodrigo-suarez",
     href: "https://github.com/rodrigo-suarez",
     icon: GitHubIcon,
-    description: "Mirá mi código y proyectos",
+    descriptionKey: "contact.github.description",
   },
   {
     name: "LinkedIn",
     value: "linkedin.com/in/rodrigo-suarez",
     href: "https://www.linkedin.com/in/rodrigo-suarez-85225a318",
     icon: LinkedInIcon,
-    description: "Conectemos profesionalmente",
+    descriptionKey: "contact.linkedin.description",
   },
 ];
 
 export function Contact() {
+  const { t } = useLanguage();
+  
   return (
-    <Section id="contact" title="Contacto">
+    <Section id="contact" title={t("contact.title")}>
       {/* Card destacada */}
       <div className="bg-gradient-to-br from-[var(--color-accent)]/10 to-[var(--color-accent)]/5 border border-[var(--color-accent)]/20 rounded-2xl p-8 md:p-10">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-foreground)] mb-4">
-            ¿Tenés un proyecto en mente?
+            {t("contact.heading")}
           </h3>
           <p className="text-lg text-[var(--color-muted)] mb-8 leading-relaxed max-w-2xl mx-auto">
-            Estoy abierto a nuevas oportunidades y colaboraciones. Si tenés un proyecto 
-            interesante o querés discutir sobre arquitectura backend, escribime.
+            {t("contact.description")}
           </p>
 
           {/* Grid de métodos de contacto */}
@@ -55,7 +59,7 @@ export function Contact() {
                   {method.name}
                 </span>
                 <span className="text-xs text-[var(--color-muted)] text-center">
-                  {method.description}
+                  {t(method.descriptionKey)}
                 </span>
               </a>
             ))}
