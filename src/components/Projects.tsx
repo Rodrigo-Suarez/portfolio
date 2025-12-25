@@ -12,28 +12,28 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "API Gateway para Microservicios",
-    description: "Gateway centralizado para gestionar autenticación, rate limiting y routing de +10 microservicios.",
-    problem: "Cada servicio manejaba su propia autenticación, generando inconsistencias y duplicación de lógica.",
-    solution: "Implementé un API Gateway con Kong que centraliza JWT validation, rate limiting por usuario y logging unificado.",
-    technologies: ["Python", "Kong", "Redis", "PostgreSQL", "Docker"],
-    github: "https://github.com/tu-usuario/api-gateway",
+    title: "CotizaFácil",
+    description: "Plataforma SaaS con gestión de cotizaciones, generación de PDFs y dashboard en tiempo real.",
+    problem: "Muchos trabajadores de oficios cotizan de forma informal, desordenada y sin métodos de pago digitales.",
+    solution: "Estandariza el proceso de cotización mediante plantillas, flujos guiados y estados, centralizando clientes, presupuestos y pagos en un sistema digital.",
+    technologies: ["Node.js", "TypeScript", "NestJS", "PostgreSQL", "Docker", "Redis"],
+    github: "",
   },
   {
-    title: "Sistema de Procesamiento de Pagos",
-    description: "Pipeline asíncrono para procesar transacciones con reintentos automáticos y conciliación.",
-    problem: "El sistema existente perdía transacciones durante picos de tráfico y no tenía trazabilidad.",
-    solution: "Diseñé arquitectura event-driven con RabbitMQ, dead letter queues para reintentos y dashboard de monitoreo.",
-    technologies: ["Node.js", "RabbitMQ", "MongoDB", "Stripe API", "Grafana"],
-    github: "https://github.com/tu-usuario/payment-processor",
+    title: "LockBox",
+    description: "Sistema de almacenamiento de archivos con control de versiones en Google Cloud Storage.",
+    problem: "No existe una forma simple de mantener historial y reversión de cambios en archivos personales de manera segura.",
+    solution: "Versiona automáticamente cada modificación, registra metadatos de cambios y permite restaurar estados anteriores sin intervención manual del usuario.",
+    technologies: ["Python", "Django", "PostgreSQL", "Google Cloud Storage"],
+    github: "https://github.com/Rodrigo-Suarez/Lock-Box",
   },
   {
-    title: "CLI para Migración de Datos",
-    description: "Herramienta de línea de comandos para migrar datos entre diferentes bases de datos con validación.",
-    problem: "Las migraciones manuales tomaban días y eran propensas a errores de integridad.",
-    solution: "Desarrollé CLI con validaciones pre/post migración, rollback automático y reportes de discrepancias.",
-    technologies: ["Python", "Click", "SQLAlchemy", "PostgreSQL", "MySQL"],
-    github: "https://github.com/tu-usuario/data-migrator",
+    title: "Ticket Flow",
+    description: "Gestión de eventos y tickets digitales con QR únicos e integración de pagos (Mercado Pago).",
+    problem: "La gestión manual de entradas genera errores, fraude y falta de control en eventos.",
+    solution: "Automatiza el ciclo completo del ticket mediante generación única, validación en tiempo real y control de acceso centralizado.",
+    technologies: ["Python", "FastAPI", "SQLAlchemy", "MySQL", "Mercado Pago"],
+    github: "https://github.com/Rodrigo-Suarez/Ticket-Flow",
   },
 ];
 
@@ -42,7 +42,7 @@ export function Projects() {
     <Section id="projects" title="Proyectos">
       <div className="grid gap-6">
         {projects.map((project, index) => (
-          <Card key={index}>
+          <Card key={index} className="hover:border-[var(--color-accent)]/50 transition-all duration-300">
             <CardHeader>
               <CardTitle>{project.title}</CardTitle>
               <CardDescription>{project.description}</CardDescription>

@@ -29,17 +29,17 @@ export function Contact() {
     <Section id="contact" title="Contacto">
       {/* Card destacada */}
       <div className="bg-gradient-to-br from-[var(--color-accent)]/10 to-[var(--color-accent)]/5 border border-[var(--color-accent)]/20 rounded-2xl p-8 md:p-10">
-        <div className="max-w-2xl">
+        <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-foreground)] mb-4">
             ¿Tenés un proyecto en mente?
           </h3>
-          <p className="text-lg text-[var(--color-muted)] mb-8 leading-relaxed">
+          <p className="text-lg text-[var(--color-muted)] mb-8 leading-relaxed max-w-2xl mx-auto">
             Estoy abierto a nuevas oportunidades y colaboraciones. Si tenés un proyecto 
             interesante o querés discutir sobre arquitectura backend, escribime.
           </p>
 
           {/* Grid de métodos de contacto */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
             {contactMethods.map((method) => (
               <a
                 key={method.name}
@@ -59,15 +59,7 @@ export function Contact() {
                 </span>
               </a>
             ))}
-          </div>
-
-          {/* CTA principal */}
-          <div className="pt-2">
-            <Button href="mailto:rodrigo.facultad.unsj@email.com" size="lg">
-              <EmailIcon className="w-5 h-5 mr-2" />
-              Enviar email
-            </Button>
-          </div>
+          </div>  
         </div>
       </div>
     </Section>

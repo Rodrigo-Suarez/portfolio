@@ -17,18 +17,18 @@ export function Button({
   external = false,
   className = "",
 }: ButtonProps) {
-  const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-colors";
+  const baseStyles = "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300";
   
   const variants = {
-    primary: "bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]",
-    secondary: "bg-[var(--color-border)] text-[var(--color-foreground)] hover:bg-[var(--color-muted)]/20",
+    primary: "bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] shadow-lg shadow-[var(--color-accent)]/30 hover:shadow-xl hover:shadow-[var(--color-accent)]/40",
+    secondary: "bg-[var(--color-background)] text-[var(--color-foreground)] border-2 border-[var(--color-border)] hover:border-[var(--color-muted)] hover:bg-[var(--color-border)]/50 shadow-md hover:shadow-lg",
     ghost: "text-[var(--color-muted)] hover:text-[var(--color-foreground)] hover:bg-[var(--color-border)]",
   };
 
   const sizes = {
     sm: "px-3 py-1.5 text-sm",
     md: "px-4 py-2 text-sm",
-    lg: "px-6 py-3 text-base",
+    lg: "px-7 py-3.5 text-base",
   };
 
   const styles = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;

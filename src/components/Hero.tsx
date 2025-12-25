@@ -30,7 +30,7 @@ export function Hero() {
               Backend Developer
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-[var(--color-foreground)] tracking-tight">
-              Rodrigo Suárez
+              Rodrigo Suarez
             </h1>
           </div>
           
@@ -60,7 +60,7 @@ export function Hero() {
             <Button href="#projects" size="lg">
               Ver proyectos
             </Button>
-            <Button href="/cv.pdf" variant="secondary" size="lg" external>
+            <Button href="/CV-ES-Rodrigo-Suarez-Backend.pdf" variant="secondary" size="lg" external>
               <DownloadIcon className="w-4 h-4 mr-2" />
               Descargar CV
             </Button>
