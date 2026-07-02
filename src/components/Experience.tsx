@@ -26,9 +26,8 @@ const experiences: ExperienceItem[] = [
       "experience.job1.achievement2",
       "experience.job1.achievement3",
       "experience.job1.achievement4",
-      "experience.job1.achievement5",
     ],
-    technologies: ["Python", "MySQL", "Docker", "Scraping", "Grafana"],
+    technologies: ["NestJS", "TypeScript", "TypeORM", "PostgreSQL", "Python", "Redis", "LLMs", "Docker", "Playwright"],
   },
   {
     titleKey: "experience.job2.title",
@@ -62,29 +61,21 @@ export function Experience() {
   
   return (
     <Section id="experience" title={t("experience.title")}>
-      <div className="space-y-6">
-        {experiences.map((exp, index) => {
-          const isCurrentJob = index === 0;
-          return (
-            <Card 
-              key={index}
-              className={isCurrentJob ? "relative border-[3px] border-[var(--color-accent)] bg-gradient-to-br from-[var(--color-accent)]/10 via-[var(--color-accent)]/5 to-transparent shadow-2xl shadow-[var(--color-accent)]/20 hover:shadow-[var(--color-accent)]/30 transition-all duration-300" : "hover:border-[var(--color-border)] transition-colors"}
-            >
-              {/* Badge flotante para trabajo actual */}
-              {isCurrentJob && (
-                <div className="absolute -top-3 -right-3 z-10">
-                  <Badge className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-hover)] text-white border-none shadow-lg shadow-[var(--color-accent)]/40 px-4 py-2 text-sm font-bold">
-                    {t("experience.currentBadge")}
-                  </Badge>
-                </div>
-              )}
-              
-              <CardHeader>
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    {/* Logo de empresa */}
-                    {exp.logo && (
-                      <div className={`relative ${isCurrentJob ? 'w-16 h-16' : 'w-12 h-12'} rounded-xl overflow-hidden ${isCurrentJob ? 'ring-2 ring-[var(--color-accent)]/50 shadow-lg' : 'bg-[var(--color-border)]'} flex-shrink-0 transition-all`}>
+      {/* Timeline */}
+      <div className="relative">
+        {/* Vertical line — hidden on mobile, starts from center of first node (w-22/2 = 44px) */}
+        <div className="hidden md:block absolute left-[44px] top-[44px] bottom-0 w-px bg-gradient-to-b from-[var(--color-accent)] via-[var(--color-border)] to-transparent" />
+        
+        <div className="space-y-8">
+          {experiences.map((exp, index) => {
+            const isCurrentJob = index === 0;
+            return (
+              <div key={index} className="relative flex flex-col md:flex-row gap-4 md:gap-8">
+                {/* Mobile: logo + title row */}
+                <div className="md:hidden flex items-start gap-4">
+                  <div className={`flex-shrink-0 w-14 h-14 rounded-full flex items-center justify-center ${isCurrentJob ? 'bg-[var(--color-accent)]/15 ring-2 ring-[var(--color-accent)]/50 animate-pulse-glow' : 'bg-[var(--color-surface)] border border-[var(--color-border)]'}`}>
+                    {exp.logo ? (
+                      <div className={`relative w-9 h-9 rounded-full overflow-hidden`}>
                         <Image
                           src={exp.logo}
                           alt={`${t(exp.companyKey)} logo`}
@@ -92,53 +83,101 @@ export function Experience() {
                           className="object-cover"
                         />
                       </div>
+                    ) : (
+                      <span className="font-mono text-sm text-[var(--color-muted)]">{index + 1}</span>
                     )}
-                    <div>
-                      <CardTitle className={isCurrentJob ? "text-xl md:text-2xl text-[var(--color-accent)] font-bold" : ""}>
-                        {t(exp.titleKey)}
-                      </CardTitle>
-                      <CardDescription className={isCurrentJob ? "text-base font-medium" : ""}>
-                        {t(exp.companyKey)}
-                      </CardDescription>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <CardTitle className={isCurrentJob ? "text-[var(--color-accent)] text-lg" : "text-lg"}>{t(exp.titleKey)}</CardTitle>
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <CardDescription className={isCurrentJob ? "text-[var(--color-foreground)] font-medium" : ""}>{t(exp.companyKey)}</CardDescription>
+                      <span className={`text-xs ${isCurrentJob ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-2 py-0.5 rounded-md' : 'text-[var(--color-muted)] bg-[var(--color-surface-hover)] px-2 py-0.5 rounded-md'}`}>
+                        {t(exp.periodKey)}
+                      </span>
                     </div>
                   </div>
-                  <span className={`text-sm font-semibold ${isCurrentJob ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-3 py-1.5 rounded-lg' : 'text-[var(--color-muted)]'}`}>
-                    {t(exp.periodKey)}
-                  </span>
                 </div>
-              </CardHeader>
-              
-              <CardContent>
-                <p className={`mb-4 ${isCurrentJob ? 'text-[var(--color-foreground)] text-base' : 'text-[var(--color-muted)]'}`}>
-                  {t(exp.descriptionKey)}
-                </p>
-                
-                <ul className="space-y-2 mb-4">
-                  {exp.achievementKeys.map((achievementKey, i) => (
-                    <li key={i} className={`text-sm flex items-start gap-2 ${isCurrentJob ? 'text-[var(--color-foreground)]' : 'text-[var(--color-muted)]'}`}>
-                      <span className={`${isCurrentJob ? 'text-[var(--color-accent)] text-xl mt-0.5' : 'text-[var(--color-accent)] mt-1'}`}>
-                        •
-                      </span>
-                      {t(achievementKey)}
-                    </li>
-                  ))}
-                </ul>
 
-                <div className="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech) => (
-                    <Badge 
-                      key={tech} 
-                      variant="outline"
-                      className={isCurrentJob ? "border-[var(--color-accent)] text-[var(--color-accent)] font-semibold hover:bg-[var(--color-accent)]/10 transition-colors" : ""}
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
+                {/* Desktop: timeline node */}
+                <div className="hidden md:flex flex-shrink-0 relative z-10">
+                  <div className={`w-22 h-22 rounded-full flex items-center justify-center ${isCurrentJob ? 'bg-[var(--color-accent)]/15 ring-2 ring-[var(--color-accent)]/50 animate-pulse-glow' : 'bg-[var(--color-surface)] border border-[var(--color-border)]'}`}>
+                    {exp.logo ? (
+                      <div className={`relative ${isCurrentJob ? 'w-15 h-15' : 'w-14 h-14'} rounded-full overflow-hidden`}>
+                        <Image
+                          src={exp.logo}
+                          alt={`${t(exp.companyKey)} logo`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <span className="font-mono text-sm text-[var(--color-muted)]">{index + 1}</span>
+                    )}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+
+                {/* Card */}
+                <Card 
+                  className={`flex-1 ${isCurrentJob ? 'border-[var(--color-accent)]/40 bg-[var(--color-surface)] glow-border' : 'bg-[var(--color-surface)] hover:border-[var(--color-accent)]/20'} transition-all duration-300`}
+                >
+                  {isCurrentJob && (
+                    <div className="absolute -top-3 right-4 z-10">
+                      <Badge className="bg-[var(--color-accent)] text-[var(--color-background)] border-none text-xs font-bold px-3 py-1">
+                        <span className="status-dot mr-2" />
+                        {t("experience.currentBadge")}
+                      </Badge>
+                    </div>
+                  )}
+                  
+                  <CardHeader className="hidden md:block">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                      <div>
+                        <CardTitle className={isCurrentJob ? "text-[var(--color-accent)]" : ""}>
+                          {t(exp.titleKey)}
+                        </CardTitle>
+                        <CardDescription className={isCurrentJob ? "text-[var(--color-foreground)] font-medium" : ""}>
+                          {t(exp.companyKey)}
+                        </CardDescription>
+                      </div>
+                      <span className={`text-xs ${isCurrentJob ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/10 px-3 py-1.5 rounded-md' : 'text-[var(--color-muted)] bg-[var(--color-surface-hover)] px-3 py-1.5 rounded-md'}`}>
+                        {t(exp.periodKey)}
+                      </span>
+                    </div>
+                  </CardHeader>
+                  
+                  <CardContent>
+                    <p className={`mb-4 text-sm leading-relaxed ${isCurrentJob ? 'text-[var(--color-foreground)]' : 'text-[var(--color-muted)]'}`}>
+                      {t(exp.descriptionKey)}
+                    </p>
+                    
+                    <ul className="space-y-2 mb-4">
+                      {exp.achievementKeys.map((achievementKey, i) => (
+                        <li key={i} className={`text-sm flex items-start gap-2 ${isCurrentJob ? 'text-[var(--color-foreground)]' : 'text-[var(--color-muted)]'}`}>
+                          <span className="text-[var(--color-accent)] mt-1.5 flex-shrink-0">
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 12 12"><path d="M6 0l1.5 4.5L12 6l-4.5 1.5L6 12l-1.5-4.5L0 6l4.5-1.5z"/></svg>
+                          </span>
+                          {t(achievementKey)}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech) => (
+                        <Badge 
+                          key={tech} 
+                          variant="outline"
+                          className={isCurrentJob ? "border-[var(--color-accent)]/30 text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10" : ""}
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </Section>
   );

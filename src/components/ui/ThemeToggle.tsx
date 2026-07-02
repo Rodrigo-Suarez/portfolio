@@ -28,14 +28,13 @@ export function ThemeToggle() {
     document.documentElement.classList.add(newTheme);
   };
 
-  // Evitar hydration mismatch
   if (!mounted) {
     return (
       <button
-        className="p-2 rounded-lg text-[var(--color-muted)] hover:text-[var(--color-foreground)] hover:bg-[var(--color-border)] transition-colors"
+        className="p-2 rounded-lg text-[var(--color-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface)] transition-colors"
         aria-label="Cambiar tema"
       >
-        <div className="w-5 h-5" />
+        <div className="w-4 h-4" />
       </button>
     );
   }
@@ -45,10 +44,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg text-[var(--color-muted)] hover:text-[var(--color-foreground)] hover:bg-[var(--color-border)] transition-colors"
+      className="p-2 rounded-lg text-[var(--color-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface)] transition-colors"
       aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
     >
-      {isDark ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
+      {isDark ? <SunIcon className="w-4 h-4" /> : <MoonIcon className="w-4 h-4" />}
     </button>
   );
 }

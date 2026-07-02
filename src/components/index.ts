@@ -6,3 +6,5 @@ export { Experience } from "./Experience";
 export { Projects } from "./Projects";
 export { Stack } from "./Stack";
 export { Contact } from "./Contact";
+export { NowSection } from "./NowSection";
+export { Philosophy } from "./Philosophy";

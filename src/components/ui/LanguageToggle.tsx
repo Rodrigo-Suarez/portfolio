@@ -8,7 +8,7 @@ export function LanguageToggle() {
   return (
     <button
       onClick={() => setLanguage(language === "es" ? "en" : "es")}
-      className="px-2 py-1 rounded-lg text-sm font-medium text-[var(--color-muted)] hover:text-[var(--color-foreground)] hover:bg-[var(--color-border)] transition-colors"
+      className="px-2 py-1 rounded-lg text-xs font-medium text-[var(--color-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface)] transition-colors"
       aria-label={language === "es" ? "Switch to English" : "Cambiar a Español"}
     >
       {language === "es" ? "EN" : "ES"}
