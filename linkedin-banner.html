@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400">
+<title>LinkedIn Banner - Rodrigo Suárez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg: #0B0B0F;
+    --fg: #E8E8ED;
+    --muted: #6B6B80;
+    --accent: #00FFD1;
+    --accent-hover: #00E6BD;
+    --accent-secondary: #FFB800;
+    --accent-tertiary: #00FF88;
+    --surface: #12121A;
+    --surface-hover: #1A1A26;
+    --border: #1E1E2E;
+    --glow: rgba(0, 255, 209, 0.15);
+    --glow-strong: rgba(0, 255, 209, 0.3);
+  }
+
+  body {
+    background: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  .banner {
+    width: 1400px;
+    height: 350px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(107, 107, 128, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .banner::after {
+    content: '';
+    position: absolute;
+    top: -120px;
+    left: -80px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--glow-strong) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .terminal-chrome {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 2;
+  }
+
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .terminal-dot.red { background: #FF5F57; }
+  .terminal-dot.yellow { background: #FEBC2E; }
+  .terminal-dot.green { background: #28C840; }
+
+  .terminal-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin-left: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .terminal-title span {
+    color: var(--accent);
+  }
+
+  .terminal-handle {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .terminal-handle span {
+    color: var(--accent);
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 60px 0 40px;
+    gap: 28px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .name-line {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    white-space: nowrap;
+  }
+
+  .prompt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    color: var(--accent);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--fg);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .tagline {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 420px;
+    margin-top: 4px;
+  }
+
+  .tagline strong {
+    color: var(--fg);
+    font-weight: 500;
+  }
+
+  .divider-line {
+    width: 1px;
+    height: 140px;
+    background: linear-gradient(to bottom, transparent, var(--border), var(--accent), var(--border), transparent);
+    flex-shrink: 0;
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .stack-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tech-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tech-pill.primary {
+    border-color: rgba(0, 255, 209, 0.3);
+    color: var(--accent);
+    background: rgba(0, 255, 209, 0.06);
+  }
+
+  .tech-pill.secondary {
+    border-color: rgba(255, 184, 0, 0.3);
+    color: var(--accent-secondary);
+    background: rgba(255, 184, 0, 0.06);
+  }
+
+  .highlights {
+    display: flex;
+    gap: 20px;
+    margin-top: 4px;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-tertiary);
+    box-shadow: 0 0 6px var(--accent-tertiary);
+    flex-shrink: 0;
+  }
+
+  .highlight-text {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .highlight-text strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .footer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 2;
+  }
+
+  .footer-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .footer-link span {
+    color: var(--accent);
+  }
+
+  .footer-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cursor-blink {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--accent);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .glow-border-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent 10%, var(--accent) 50%, transparent 90%);
+    opacity: 0.4;
+    z-index: 3;
+  }
+
+  .glow-border-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent 10%, var(--accent) 50%, transparent 90%);
+    opacity: 0.4;
+    z-index: 3;
+  }
+
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="glow-border-left"></div>
+    <div class="glow-border-right"></div>
+    <div class="scanlines"></div>
+
+    <div class="terminal-chrome">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <div class="terminal-title"><span>~</span>/rodrigo-suarez</div>
+      <div class="terminal-handle">rsuarez@dev:~$ <span>█</span></div>
+    </div>
+
+    <div class="content">
+      <div class="left" style="padding-left: 240px;">
+        <div>
+          <div class="stack-section-label">// stack</div>
+          <div class="stack-grid">
+            <span class="tech-pill primary">Node.js</span>
+            <span class="tech-pill primary">NestJS</span>
+            <span class="tech-pill primary">TypeScript</span>
+            <span class="tech-pill secondary">PostgreSQL</span>
+            <span class="tech-pill secondary">Docker</span>
+            <span class="tech-pill secondary">Redis</span>
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">Linux</span>
+            <span class="tech-pill">Git</span>
+          </div>
+        </div>
+        <div class="highlights">
+          <div class="highlight-item">
+            <div class="status-dot"></div>
+            <div class="highlight-text"><strong>CotizaX</strong> · SaaS en producción</div>
+          </div>
+          <div class="highlight-item">
+            <div class="status-dot"></div>
+            <div class="highlight-text"><strong>1 año</strong> de experiencia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider-line"></div>
+
+      <div class="right">
+        <div class="name-line">
+          <span class="prompt">❯</span>
+          <span class="name">Rodrigo Suárez</span>
+        </div>
+        <div class="role">Backend Developer</div>
+        <div class="tagline">
+          Diseño y desarrollo <strong>sistemas backend robustos</strong>,
+          <strong>APIs escalables</strong> y arquitecturas que resuelven
+          problemas de negocio reales.
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="footer-link">github.com/<span>rodrigo-suarez</span></div>
+      <div class="footer-right">
+        <span>rodrigo.facultad.unsj@gmail.com</span>
+        <span class="cursor-blink"></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
