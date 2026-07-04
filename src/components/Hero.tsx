@@ -113,9 +113,18 @@ export function Hero() {
 
           {/* Action buttons */}
           <div className="animate-fade-in-up stagger-5 flex flex-wrap gap-4 pt-2">
-            <Button href="#projects" size="lg" className="btn-glitch">
+            <button
+              onClick={() => {
+                const el = document.getElementById("projects");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth" });
+                  history.pushState(null, "", "#projects");
+                }
+              }}
+              className="inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-300 bg-[var(--color-accent)] text-[var(--color-background)] hover:bg-[var(--color-accent-hover)] hover:shadow-[0_0_20px_var(--color-glow)] shadow-[0_0_8px_var(--color-glow)] px-6 py-3 text-sm btn-glitch"
+            >
               {t("hero.viewProjects")}
-            </Button>
+            </button>
             <Button href={t("hero.cvPath")} variant="secondary" size="lg" external>
               <DownloadIcon className="w-4 h-4 mr-2" />
               {t("hero.downloadCV")}

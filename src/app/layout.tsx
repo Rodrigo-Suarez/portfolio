@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { NeuralBackground } from "@/components";
+import { TouchFeedback } from "@/components/TouchFeedback";
 
 export const metadata: Metadata = {
   title: "Rodrigo Suárez | Backend Developer",
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <body className="antialiased">
+        <TouchFeedback />
         <NeuralBackground />
         <LanguageProvider>
           {children}
