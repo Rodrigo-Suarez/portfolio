@@ -155,7 +155,7 @@ export function Contact() {
               {msg.sender === "me" && (
                 <div className="w-8 h-8 rounded-full overflow-hidden border border-[var(--color-accent)]/30 shrink-0 shadow-[0_0_8px_var(--color-glow)]">
                   <Image
-                    src="/images/profile.jpg"
+                    src="/images/profile.png"
                     alt="Rodrigo"
                     width={32}
                     height={32}
@@ -200,7 +200,7 @@ export function Contact() {
               {typingSender === "me" && (
                 <div className="w-8 h-8 rounded-full overflow-hidden border border-[var(--color-accent)]/30 shrink-0 shadow-[0_0_8px_var(--color-glow)]">
                   <Image
-                    src="/images/profile.jpg"
+                    src="/images/profile.png"
                     alt="Rodrigo"
                     width={32}
                     height={32}

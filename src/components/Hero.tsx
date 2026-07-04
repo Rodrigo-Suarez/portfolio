@@ -135,7 +135,7 @@ export function Hero() {
             </div>
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-b-lg rounded-tr-lg overflow-hidden border border-[var(--color-border)] animate-pulse-glow profile-glitch">
               <Image
-                src="/images/profile.jpg"
+                src="/images/profile.png"
                 alt="Rodrigo Suárez"
                 fill
                 className="object-cover"
