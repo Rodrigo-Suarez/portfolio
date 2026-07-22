@@ -48,7 +48,7 @@ const socialLinks = [
   },
   {
     name: "Email",
-    href: "mailto:rodrigo.facultad.unsj@email.com",
+    href: "mailto:rodrigo.facultad.unsj@gmail.com",
     icon: EmailIcon,
   },
 ];
